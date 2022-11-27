@@ -1,17 +1,31 @@
 package fr.proj.ufar.taxiserviceserver.integration
 
-import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.shouldBe
+import fr.proj.ufar.taxiserviceserver.constant.rest.BASE_URL
+import fr.proj.ufar.taxiserviceserver.dto.request.LoginRequest
+import fr.proj.ufar.taxiserviceserver.dto.response.LoginResponse
+import org.junit.jupiter.api.Test
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpMethod
+import org.springframework.http.HttpStatus
+import org.testcontainers.junit.jupiter.Testcontainers
+import kotlin.test.assertEquals
 
-class AdminControllerItest : StringSpec({
-    "should be able to add 3 and 4" {
-        val totaller = Totaller()
-        totaller.add(1) shouldBe 3
-    }
-})
+@Testcontainers
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class AdminControllerItest : AbstractApiTest() {
 
-class Totaller {
-    fun add(x: Int): Int {
-        return x + 1
+    @Test
+    internal fun shouldSignIn() {
+        // Arrange
+        val requestBody = LoginRequest(ADMIN_USERNAME, ADMIN_PASSWORD)
+        val httpEntity = HttpEntity(requestBody)
+
+        // Act
+        val response = restTemplate.exchange(BASE_URL, HttpMethod.POST, httpEntity, LoginResponse::class.java)
+
+        // Assert
+        assertEquals(response.statusCode, HttpStatus.OK)
+        assertEquals(response.body?.key, "key-1")
     }
 }

@@ -29,9 +29,8 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:mongodb")
-    testImplementation("io.kotest:kotest-runner-junit5-jvm:5.5.4")
-    testImplementation("io.kotest:kotest-assertions-core-jvm:5.5.4")
-    testImplementation("io.kotest:kotest-property-jvm:5.5.4")
+    testImplementation(kotlin("test"))
+    testImplementation("io.mockk:mockk:1.13.2")
 }
 
 dependencyManagement {
@@ -47,10 +46,6 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-//tasks.withType<Test> {
-//    useJUnitPlatform()
-//}
-
-tasks.withType<Test>().configureEach {
+tasks.withType<Test> {
     useJUnitPlatform()
 }
