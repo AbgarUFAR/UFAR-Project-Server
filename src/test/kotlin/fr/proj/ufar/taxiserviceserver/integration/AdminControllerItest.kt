@@ -4,15 +4,11 @@ import fr.proj.ufar.taxiserviceserver.constant.rest.BASE_URL
 import fr.proj.ufar.taxiserviceserver.dto.request.LoginRequest
 import fr.proj.ufar.taxiserviceserver.dto.response.LoginResponse
 import org.junit.jupiter.api.Test
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
-import org.testcontainers.junit.jupiter.Testcontainers
 import kotlin.test.assertEquals
 
-@Testcontainers
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class AdminControllerItest : AbstractApiTest() {
 
     @Test
