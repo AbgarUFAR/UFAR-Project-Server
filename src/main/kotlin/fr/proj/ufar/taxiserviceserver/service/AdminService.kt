@@ -4,6 +4,7 @@ import fr.proj.ufar.taxiserviceserver.data.mongodb.AdminRepository
 import fr.proj.ufar.taxiserviceserver.dto.request.LoginRequest
 import fr.proj.ufar.taxiserviceserver.dto.response.LoginResponse
 import fr.proj.ufar.taxiserviceserver.exception.AdminLoginException
+import fr.proj.ufar.taxiserviceserver.exception.AuthorizationException
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.logging.log4j.kotlin.Logging
 import org.springframework.stereotype.Service
@@ -23,4 +24,6 @@ class AdminService(private val repository: AdminRepository) {
         }
         return LoginResponse(admin.key)
     }
+
+    fun getAdminByKey(key: String) = repository.findByKey(key) ?: throw AuthorizationException()
 }

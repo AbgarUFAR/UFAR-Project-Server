@@ -1,6 +1,6 @@
 package fr.proj.ufar.taxiserviceserver.integration
 
-import fr.proj.ufar.taxiserviceserver.constant.rest.BASE_URL
+import fr.proj.ufar.taxiserviceserver.constant.rest.ADMIN_BASE_URL
 import fr.proj.ufar.taxiserviceserver.dto.request.LoginRequest
 import fr.proj.ufar.taxiserviceserver.dto.response.LoginResponse
 import org.junit.jupiter.api.Test
@@ -18,7 +18,7 @@ class AdminControllerItest : AbstractApiTest() {
         val httpEntity = HttpEntity(requestBody)
 
         // Act
-        val response = restTemplate.exchange(BASE_URL, HttpMethod.POST, httpEntity, LoginResponse::class.java)
+        val response = restTemplate.exchange(ADMIN_BASE_URL, HttpMethod.POST, httpEntity, LoginResponse::class.java)
 
         // Assert
         assertEquals(response.statusCode, HttpStatus.OK)

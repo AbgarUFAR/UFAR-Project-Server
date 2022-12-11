@@ -6,4 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository
 interface AdminRepository : MongoRepository<Admin, String> {
 
     fun findByUsername(username: String): Admin?
+
+    fun findByKey(key: String): Admin?
 }
