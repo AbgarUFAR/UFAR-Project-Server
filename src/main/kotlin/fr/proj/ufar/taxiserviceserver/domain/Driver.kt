@@ -1,5 +1,6 @@
 package fr.proj.ufar.taxiserviceserver.domain
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import fr.proj.ufar.taxiserviceserver.constant.enumeration.Gender
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
@@ -25,7 +26,18 @@ data class Driver(
     @Field("passport_number")
     @Indexed(unique = true)
     val passportNumber: String,
-    val rating: Double = 0.0,
+    @Field("rating_one")
+    val ratingOne: Int = 0,
+    @Field("rating_two")
+    val ratingTwo: Int = 0,
+    @Field("rating_three")
+    val ratingThree: Int = 0,
+    @Field("rating_four")
+    val ratingFour: Int = 0,
+    @Field("rating_five")
+    val ratingFive: Int = 0,
+    @Field("average_rating")
+    val averageRating: Double = 0.0,
     val location: Pair<Double, Double> = Pair(0.0, 0.0),
     @CreatedDate
     val created: Date? = null,
@@ -33,13 +45,14 @@ data class Driver(
     val updated: Date? = null,
     @Field("number_of_trips")
     val numberOfTrips: Long = 0,
-    val trips: List<Trip> = emptyList()
+    val trips: List<String> = emptyList()
 ) {
 
     data class Address(
         val country: String,
         val city: String,
         @Field("postal_code")
+        @JsonProperty("postal_code")
         val postalCode: String
     )
 }

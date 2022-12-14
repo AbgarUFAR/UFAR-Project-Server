@@ -1,5 +1,6 @@
 package fr.proj.ufar.taxiserviceserver.exception.handler
 
+import fr.proj.ufar.taxiserviceserver.constant.error.BAD_REQUEST
 import fr.proj.ufar.taxiserviceserver.constant.error.CONFLICT
 import fr.proj.ufar.taxiserviceserver.constant.error.NOT_FOUND
 import fr.proj.ufar.taxiserviceserver.constant.error.UNAUTHORIZED
@@ -8,6 +9,7 @@ import fr.proj.ufar.taxiserviceserver.exception.AdminLoginException
 import fr.proj.ufar.taxiserviceserver.exception.AuthorizationException
 import fr.proj.ufar.taxiserviceserver.exception.CarAlreadyExistsException
 import fr.proj.ufar.taxiserviceserver.exception.DriverAlreadyExistsException
+import fr.proj.ufar.taxiserviceserver.exception.UnsupportedPaginationFieldNameException
 import org.apache.logging.log4j.kotlin.Logging
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -62,6 +64,18 @@ class GlobalExceptionHandler {
             .body(
                 ErrorResponse(
                     errorCode = CONFLICT,
+                    errorMessage = e.message
+                )
+            )
+    }
+
+    @ExceptionHandler
+    fun unsupportedPaginationFieldNameExceptionHandler(e: UnsupportedPaginationFieldNameException): ResponseEntity<ErrorResponse> {
+        errorLog(e)
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(
+                ErrorResponse(
+                    errorCode = BAD_REQUEST,
                     errorMessage = e.message
                 )
             )

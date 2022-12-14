@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.data.mongodb.repository.Query
 import org.springframework.data.mongodb.repository.Update
 
-interface DriverRepository : MongoRepository<Driver, String> {
+interface DriverRepository : MongoRepository<Driver, String>, DriverTemplateRepository {
 
     fun existsByPassportNumber(passportNumber: String): Boolean
 
