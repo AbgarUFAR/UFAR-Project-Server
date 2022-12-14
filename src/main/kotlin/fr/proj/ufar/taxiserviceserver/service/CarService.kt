@@ -19,4 +19,6 @@ class CarService(private val repository: CarRepository) {
                 model = car.model
             )
         )
+
+    fun deleteCarById(id: String) = repository.deleteById(id)
 }

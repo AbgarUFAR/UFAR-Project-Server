@@ -12,7 +12,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 
-val supportedPaginationFields = arrayOf("created", "average_rating", "number_of_trips")
+private val supportedPaginationFields = arrayOf("created", "average_rating", "number_of_trips")
 
 @Service
 class DriverService(
@@ -59,5 +59,11 @@ class DriverService(
             isFirst = pageDrivers.isFirst,
             isLast = pageDrivers.isLast
         )
+    }
+
+    fun deleteDriverByPassportNumber(passportNumber: String) {
+        val driver = repository.findByPassportNumber(passportNumber) ?: return
+        carService.deleteCarById(driver.carId!!)
+        repository.delete(driver)
     }
 }

@@ -5,6 +5,7 @@ import fr.proj.ufar.taxiserviceserver.dto.request.DriverCreateRequest
 import fr.proj.ufar.taxiserviceserver.dto.response.DriversPageResponse
 import fr.proj.ufar.taxiserviceserver.dto.response.SuccessResponse
 import fr.proj.ufar.taxiserviceserver.service.DriverService
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -29,4 +30,10 @@ class DriverController(private val driverService: DriverService) {
         @RequestParam(defaultValue = "0") page: Int,
         @RequestParam(defaultValue = "3") size: Int,
     ): DriversPageResponse = driverService.getAllDriversPage(page, size, fieldName)
+
+    @DeleteMapping
+    fun deleteDriverByPassportNumber(@RequestParam passportNumber: String): SuccessResponse {
+        driverService.deleteDriverByPassportNumber(passportNumber)
+        return SuccessResponse()
+    }
 }

@@ -9,6 +9,8 @@ interface DriverRepository : MongoRepository<Driver, String>, DriverTemplateRepo
 
     fun existsByPassportNumber(passportNumber: String): Boolean
 
+    fun findByPassportNumber(passportNumber: String): Driver?
+
     @Query("{'_id': ?0}")
     @Update("{ \$set: { 'car_id': ?1, 'updated': new Date() } }")
     fun updateCarId(driverId: String, carId: String)
